@@ -6,7 +6,7 @@ using Cinemachine;
 public class CamSwitch : MonoBehaviour
 {
 
-    public CinemachineVirtualCamera cam1;
+    public CinemachineVirtualCamera cam1; //[SerializeField] private
     public CinemachineVirtualCamera cam2;
     public GameObject player1;
     public GameObject player2;
