@@ -13,16 +13,28 @@ public class LevelLoader : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.V))
         {
-            LoadNextLevel();
+            LoadOtherDimension();
         }
     }
 
-    public void LoadNextLevel() 
+    public void LoadOtherDimension() 
     {
-        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Home")
+        {
+            StartCoroutine(LoadLevel("Level0_3D"));
+        }
+        else if (sceneName == "Level0_3D")
+        {
+            StartCoroutine(LoadLevel("Home"));
+        }
+        else
+        {
+            Debug.Log("Nessuno dei due casi");
+        }
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevel(string levelName)
     {
         //Play animation
         transition.SetTrigger("Start");
@@ -31,7 +43,6 @@ public class LevelLoader : MonoBehaviour
         yield return new WaitForSeconds(transitionTime);
 
         //Load scene
-        SceneManager.LoadScene(levelIndex);
-
+        SceneManager.LoadScene(levelName);
     }
 }

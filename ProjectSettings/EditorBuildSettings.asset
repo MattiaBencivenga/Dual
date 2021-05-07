@@ -11,7 +11,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level0_3D.unity
     guid: fa7334f9dcca3bc4d969b6131ac1f52e
-  - enabled: 1
-    path: Assets/Scenes/IsometricScene.unity
-    guid: 1583f2b5ec2e1c943b1989793e12f713
   m_configObjects: {}
