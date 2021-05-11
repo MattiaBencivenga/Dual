@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour
     public Text dialogueText;
     private Queue<string> sentences;
     private Queue<string> names;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        animator.SetBool("IsOpen", true);
         names.Clear();
         sentences.Clear();
         foreach(string sentence in dialogue.sentences)
@@ -64,6 +66,6 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        Debug.Log("Ended dialogue");
+        animator.SetBool("IsOpen", false);
     }
 }
