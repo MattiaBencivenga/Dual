@@ -28,8 +28,8 @@ public class TrailerChangeSkyColor : MonoBehaviour
             {
                 duration = duration - 0.03F;
                 float lerp = Mathf.PingPong(Time.time, duration) / duration;
-                cubamapSky.SetColor("_TintColor", Color.Lerp(colorStart, colorEnd, lerp));
-                RenderSettings.fogColor = Color.Lerp(colorStart, colorEnd, lerp);
+                cubamapSky.SetColor("_TintColor", Color.Lerp(colorEnd, colorStart, lerp));
+                RenderSettings.fogColor = Color.Lerp(colorEnd, colorStart, lerp);
             }
             else if (duration < 0.5F && duration >= 0.1F)
             {
