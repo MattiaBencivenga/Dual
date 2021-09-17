@@ -5,13 +5,21 @@ using UnityEngine;
 public class DialogueTrigger : MonoBehaviour
 {
     public Dialogue dialogue;
-    public GameObject button;
+    public GameObject trigger;
     public GameObject canvas;
-    // Start is called before the first frame update
+
+    void Update()
+    {
+		if (trigger.activeSelf)
+		{
+            trigger.SetActive(false);
+			TriggerDialogue();
+		}
+	}
+
     public void TriggerDialogue()
     {
         FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
-        button.SetActive(false);
         canvas.SetActive(true);
     }
 }
