@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+
     public Rigidbody2D rb;
     public Animator animator;
+    private SpriteRenderer spriteRenderer;
+    public Sprite newSprite;
+    public float moveSpeed = 5f;
     public bool canMove;
 
     Vector2 movement;
     int status_idle;
+
+    void Start()
+    {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -39,7 +48,12 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Vertical", movement.y);
             animator.SetFloat("Speed", movement.sqrMagnitude);
             if (movement.sqrMagnitude == 0)
-                animator.SetInteger("Idle", status_idle); 
+                animator.SetInteger("Idle", status_idle);
+        }
+        else
+        {
+            animator.SetInteger("Idle", 1);
+            spriteRenderer.sprite = newSprite;
         }
 
     }

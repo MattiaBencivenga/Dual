@@ -11,13 +11,15 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> names;
     public Animator animator;
     private PlayerMovement thePlayer;
+    public Animator blacktransition;
+    public GameObject cutscene;
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
-        thePlayer = FindObjectOfType<PlayerMovement>();
+        //thePlayer = FindObjectOfType<PlayerMovement>();
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -68,7 +70,10 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
-        thePlayer.canMove = true;
+        blacktransition.SetTrigger("Start");
+        //thePlayer.canMove = true;
         animator.SetBool("IsOpen", false);
+        cutscene.SetActive(false);
+
     }
 }
