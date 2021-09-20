@@ -12,7 +12,6 @@ public class DialogueManager : MonoBehaviour
     public Animator animator;
     private PlayerMovement thePlayer;
     public Animator blacktransition;
-    public GameObject cutscene;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +65,8 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return null;
         }
+        yield return new WaitForSeconds(2);
+        DisplaySentence();
     }
 
     void EndDialogue()
@@ -73,7 +74,5 @@ public class DialogueManager : MonoBehaviour
         blacktransition.SetTrigger("Start");
         //thePlayer.canMove = true;
         animator.SetBool("IsOpen", false);
-        cutscene.SetActive(false);
-
     }
 }
