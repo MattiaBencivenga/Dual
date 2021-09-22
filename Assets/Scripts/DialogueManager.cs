@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public int wait;
     public Text nameText;
     public Text dialogueText;
     private Queue<string> sentences;
     private Queue<string> names;
     public Animator animator;
     private PlayerMovement thePlayer;
-    public Animator blacktransition;
+    public Animator blackTransition;
+    public bool firstScene;
 
     // Start is called before the first frame update
     void Start()
@@ -65,13 +67,14 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return null;
         }
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(wait);
         DisplaySentence();
     }
 
     void EndDialogue()
     {
-        blacktransition.SetTrigger("Start");
+        if (firstScene)
+            blackTransition.SetTrigger("Start");
         //thePlayer.canMove = true;
         animator.SetBool("IsOpen", false);
     }
