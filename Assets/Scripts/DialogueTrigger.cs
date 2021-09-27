@@ -8,11 +8,11 @@ public class DialogueTrigger : MonoBehaviour
     public GameObject trigger;
     public GameObject canvas;
 
-	void Update()
+    void Update()
     {
 		if (trigger.activeSelf)
 		{
-			trigger.SetActive(false);
+            trigger.SetActive(false);
 			TriggerDialogue();
 		}
 	}

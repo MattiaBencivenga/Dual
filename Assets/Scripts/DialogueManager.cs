@@ -5,17 +5,22 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public int wait;
     public Text nameText;
     public Text dialogueText;
     private Queue<string> sentences;
     private Queue<string> names;
     public Animator animator;
+    private PlayerMovement thePlayer;
+    public Animator blackTransition;
+    public bool firstScene;
 
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
         names = new Queue<string>();
+        //thePlayer = FindObjectOfType<PlayerMovement>();
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -36,7 +41,7 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplaySentence()
     {
-        if (sentences.Count==0)
+        if (sentences.Count==0 && animator.GetBool("IsOpen"))
         {
             EndDialogue();
             return;
@@ -62,10 +67,15 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return null;
         }
+        yield return new WaitForSeconds(wait);
+        DisplaySentence();
     }
 
     void EndDialogue()
     {
+        if (firstScene)
+            blackTransition.SetTrigger("Start");
+        //thePlayer.canMove = true;
         animator.SetBool("IsOpen", false);
     }
 }

@@ -4,39 +4,58 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+
     public Rigidbody2D rb;
     public Animator animator;
+    private SpriteRenderer spriteRenderer;
+    public Sprite newSprite;
+    public float moveSpeed = 5f;
+    public bool canMove;
 
     Vector2 movement;
     int status_idle;
 
+    void Start()
+    {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+    }
+
+
     // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
-        if (movement.y < 0)
+        if (canMove)
         {
-            status_idle = 0;
+            movement.x = Input.GetAxisRaw("Horizontal");
+            movement.y = Input.GetAxisRaw("Vertical");
+            if (movement.y < 0)
+            {
+                status_idle = 0;
+            }
+            if (movement.y > 0)
+            {
+                status_idle = 1;
+            }
+            if (movement.x < 0 && movement.y == 0)
+            {
+                status_idle = 2;
+            }
+            if (movement.x > 0 && movement.y == 0)
+            {
+                status_idle = 3;
+            }
+            animator.SetFloat("Horizontal", movement.x);
+            animator.SetFloat("Vertical", movement.y);
+            animator.SetFloat("Speed", movement.sqrMagnitude);
+            if (movement.sqrMagnitude == 0)
+                animator.SetInteger("Idle", status_idle);
         }
-        if (movement.y > 0)
+        else
         {
-            status_idle = 1;
+            animator.SetInteger("Idle", 1);
+            spriteRenderer.sprite = newSprite;
         }
-        if (movement.x < 0 && movement.y==0)
-        {
-            status_idle = 2;
-        }
-        if (movement.x > 0 && movement.y == 0)
-        {
-            status_idle = 3;
-        }
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
-        if (movement.sqrMagnitude == 0)
-            animator.SetInteger("Idle", status_idle);
+
     }
 
     void FixedUpdate()
