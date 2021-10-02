@@ -37,7 +37,7 @@ public class LevelLoader : MonoBehaviour
     IEnumerator LoadLevel(string levelName)
     {
         //Play animation
-        transition.SetTrigger("Start");
+        transition.SetTrigger("StartLoading");
 
         //Wait
         yield return new WaitForSeconds(transitionTime);
