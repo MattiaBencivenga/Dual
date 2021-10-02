@@ -32,8 +32,8 @@ public class StartDialogue : Interactable
             //dialogueManager.EndDialogue();
             _hasToStart = true;
             isColliding = false;
-            if (chimney)
-                SceneManager.LoadScene(2);
+            /*if (chimney)
+                SceneManager.LoadScene(2);*/
         }
     }
 }
