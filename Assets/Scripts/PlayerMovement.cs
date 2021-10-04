@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         {
             movement.x = Input.GetAxisRaw("Horizontal");
             movement.y = Input.GetAxisRaw("Vertical");
+            movement = movement.normalized;
             if (movement.y < 0)
             {
                 status_idle = 0;
